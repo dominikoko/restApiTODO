@@ -1,7 +1,6 @@
 if(process.env.NODE_ENV !== 'production'){
     require('dotenv').config()
 }
-const mysqlConf = require('./config/database.js');
 const express = require('express');
 var app = express();
 const bodyparser = require('body-parser');
@@ -9,8 +8,9 @@ const bcrypt = require('bcrypt');
 const flash = require('express-flash');
 const session = require('express-session');
 const passport = require('passport');
-
+const mysql = require ('mysql');
 const initializePassport = require('./passport-config')
+
 
 initializePassport(passport, 
     email=>{ //users.find(user => user.email === email)
@@ -24,7 +24,7 @@ initializePassport(passport,
 }
 )
 
-//const users =[]
+
 
 app.use(express.urlencoded({extended:false}))
 app.set('view-engine','ejs');
@@ -38,6 +38,20 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 // Database connection
+
+var connection = mysql.createConnection({
+    host:'localhost',
+    user:'root',
+    password:'passWORD',
+    database:'usersDB',
+});
+
+connection.connect((err)=>{
+    if(!err)
+    console.log('db connection succeded')
+    else
+    console.log('db connection failed /n Error' + JSON.stringify(err,undefined,2))
+});
 
 
 app.get('/',(req,res)=>{
