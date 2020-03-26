@@ -12,7 +12,7 @@ import { Todo } from "./todo";
 export class TodoListComponent implements OnInit {
   allTodos: Todo[];
   editTodo: Todo;
-  statusCode: any; //try with number
+  statusCode: any; 
   requestProcessing = false;
   todoIdToUpdate = null;
   processValidation = false;
@@ -61,10 +61,6 @@ export class TodoListComponent implements OnInit {
     let todo = this.todoForm.value;
     if (this.todoIdToUpdate === null) {
       this.todoListService.getAllTodos().subscribe(todos => {
-        // let maxIndex = todos.length - 1;
-        // let todoWithMaxIndex = todos[maxIndex];
-        // let todoId = todoWithMaxIndex.id + 1;
-        // todo.id = todoId;
         todo.id = uuid.v4();
         console.log(todo, "this is form data---");
 

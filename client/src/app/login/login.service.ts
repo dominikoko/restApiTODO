@@ -15,21 +15,5 @@ export class LoginService {
   loginUser(body: User) {
     return this.http.post(this.userUrl + '/loginUser', body, { observe: 'body'});
    }
-//   login(user:User):Observable<User> {
-//     let httpOptions = {
-//     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-//     }
-//     console.log(this.userUrl+"/loginUser")
-// return this.http.post<User>(this.userUrl+"/loginUser",httpOptions).
-// pipe(
-// catchError(this.handleError)
-// )
-// }
 
-
-// private handleError(error: Response | any) {
-//   console.error(error.message || error);
-//   return Observable.throw(error.status);
-// }
-// 
   }

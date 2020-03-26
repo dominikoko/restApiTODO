@@ -32,5 +32,3 @@ exports.login = async function(req, res) {
     res.render("todo.ejs", { message: message });
   }
 };
-
-// module.exports = router;

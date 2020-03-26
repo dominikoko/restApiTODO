@@ -13,11 +13,6 @@ const morgan = require("morgan"),
   .use(cors())
   .use(bodyParser.json());
 
-  // var corsOptions = {
-  //   origin: "http://localhost:3001"
-  // };
-  // app.use(cors(corsOptions));
-
 app.use(express.urlencoded({ extended: false })),
 (bodyParser.json()),
 (bodyParser.urlencoded({ extended: false })),

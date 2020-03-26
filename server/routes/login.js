@@ -6,7 +6,7 @@ loginService = require('../services/user')
 const mysql = require('mysql');
 const jwt = require('jsonwebtoken')
 
-// get user
+
 
 router.get('/users', (req,res)=>{
    connection.query('SELECT * FROM user', (err, rows, fields) => {
@@ -17,7 +17,7 @@ router.get('/users', (req,res)=>{
    })
  });
  
- // login api
+
 
  router.post('/loginUser', (req, res) => {
    let userData = req.body;

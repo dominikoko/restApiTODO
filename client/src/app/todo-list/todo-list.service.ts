@@ -42,7 +42,7 @@ export class TodoListService {
     let httpOptions = {
       headers: new HttpHeaders({ "Content-Type": "application/json" })
     };
-    return this.http // change route
+    return this.http 
       .put<Todo>(this.todoUrl + `/update-Todo/${todo.id}`, todo, httpOptions)
       .pipe(catchError(this.handleError));
   }
