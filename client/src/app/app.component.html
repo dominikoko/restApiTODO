@@ -1,0 +1,13 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav">
+        <a class="nav-link"  routerLink="/login" routerLinkActive="active">Login</a>
+        <a class="nav-link"  routerLink="/register" routerLinkActive="active">Register</a>
+        <a class="nav-link" style="cursor:pointer"  >Logout</a> 
+                <!--  add *ngIf's and bind logout button-->
+    </ul>
+  </div>
+</nav>    
+<div class="container">
+  <router-outlet></router-outlet>            
+</div>
