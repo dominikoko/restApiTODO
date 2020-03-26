@@ -1,0 +1,105 @@
+<h3 class="text-center" *ngIf="todoIdToUpdate; else create">
+  Update todo for Id: {{ todoIdToUpdate }}
+</h3>
+<ng-template #create>
+  <h3 class="text-center" style="text-align:center;">Create New todo</h3>
+</ng-template>
+<div>
+  <form [formGroup]="todoForm" (ngSubmit)="onTodoFormSubmit()">
+    <table class="table-striped" style="margin:0 auto;">
+      <tr>
+        <td>Enter Title</td>
+        <td>
+          <input formControlName="title" />
+          <label
+            *ngIf="todoForm.get('title').invalid && processValidation"
+            [ngClass]="'error'"
+          >
+            Title is required.
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td>Enter task</td>
+        <td>
+          <input formControlName="task" />
+          <!-- <textarea formControlName="task"></textarea> -->
+          <label
+            *ngIf="todoForm.get('task').invalid && processValidation"
+            [ngClass]="'error'"
+          >
+            task is required.
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button class="btn btn-primary" *ngIf="!todoIdToUpdate" style="align-self: center; position: relative;">
+            CREATE
+          </button>
+          <button class="btn btn-primary" *ngIf="todoIdToUpdate">UPDATE</button>
+          <button (click)="backToCreateTodo()" *ngIf="todoIdToUpdate">
+            Go Back
+          </button>
+        </td>
+      </tr>
+    </table>
+  </form>
+  <br />
+  <div class="text-center" *ngIf="statusCode; else processing">
+    <div *ngIf="statusCode === 201" [ngClass]="'success'">
+      todo added successfully.
+    </div>
+    <div *ngIf="statusCode === 409" [ngClass]="'success'">
+      todo already exists.
+    </div>
+    <div *ngIf="statusCode === 200" [ngClass]="'success'">
+      todo updated successfully.
+    </div>
+    <div *ngIf="statusCode === 204" [ngClass]="'success'">
+      todo deleted successfully.
+    </div>
+    <div *ngIf="statusCode === 500" [ngClass]="'error'">
+      Internal Server Error.
+    </div>
+  </div>
+  <ng-template #processing>
+    <!-- <img *ngIf="requestProcessing" src="/assets/images/loading.gif" /> -->
+  </ng-template>
+</div>
+<h3 class="text-center">todo List</h3>
+<table class="table" style="margin:1 auto;" *ngIf="allTodos">
+  <tr>
+    <th>Id</th>
+    <th>Title</th>
+    <th>task</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr *ngFor="let todo of allTodos">
+    
+    <td>{{ todo.id }}</td>
+    <td class="text-left ">
+        <a (click)="edit(todo)">
+            <span *ngIf="todo!==editTodo">{{todo.title}}</span>
+            <input *ngIf="todo===editTodo" [(ngModel)]="todo.title" (blur)="update()" (keyup.enter)="update() ">
+        </a>
+    </td>
+    
+    <td class="text-left ">
+        <a (click)="edit(todo)">
+            <span *ngIf="todo!==editTodo">{{todo.task}}</span>
+            <input *ngIf="todo===editTodo" [(ngModel)]="todo.task" (blur)="update()" (keyup.enter)="update() ">
+        </a>
+    </td>
+    <td>
+      <button
+        class="btn btn-primary"
+        type="button"
+        (click)="deleteTodo(todo.id)"
+      >
+        Delete
+      </button>
+    </td>
+  </tr>
+</table>

@@ -8,6 +8,7 @@ const morgan = require("morgan"),
   cors = require("cors"),
   loginRoute = require('./routes/login'),
   registrationRoute = require('./routes/register'),
+  todoRoute = require("./routes/todo"),
   app = express()
   .use(cors())
   .use(bodyParser.json());
@@ -24,6 +25,7 @@ app.use(express.urlencoded({ extended: false })),
 
 app.use('/login', loginRoute);
 app.use('/register', registrationRoute);
+app.use("/todo", todoRoute);
 
 app.use((req,res,next)=>{
   const err = new Error('page not found');

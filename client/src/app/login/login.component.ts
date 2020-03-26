@@ -40,11 +40,11 @@ export class LoginComponent implements OnInit {
 
   loginFormSubmit(loginForm){this.loginService.loginUser(loginForm.value).subscribe((res) => {
     this.alerts.setMessage('Login successfully!', 'success');
-     this.router.navigateByUrl('/register');
+     this.router.navigateByUrl('/todo');
   },
     err => {
       // debugger
-      // console.log(err);
+      console.log(err);
       this.alerts.setMessage ('Login failed ', 'error');
     }
   );
